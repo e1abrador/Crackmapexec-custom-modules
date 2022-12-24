@@ -8,7 +8,7 @@ class CMEModule:
     """
 
     name = 'file_discovery'
-    description = "Search for interesting files in a specified directory."
+    description = "Search for .sql files in a specified directory."
     supported_protocols = ['smb']
     opsec_safe = True   # only legitimate commands are executed on the remote host (search process and files)
     multiple_hosts = True
@@ -50,10 +50,60 @@ class CMEModule:
 
         # search for .txt files
         search_txt_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.txt -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
-        search_txt_files_cmd = 'powertxtell.exe "{}"'.format(search_txt_files_payload)
+        search_txt_files_cmd = 'powershell.exe "{}"'.format(search_txt_files_payload)
         search_txt_files_output = connection.execute(search_txt_files_cmd, True).split("\r\n")
         found = False
         for file in search_txt_files_output:
             if '.txt' in file:
                 found = True
                 context.log.highlight('Found .txt file: {}'.format(file))
+
+        # search for .bak files
+        search_bak_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.bak -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_bak_files_cmd = 'powershell.exe "{}"'.format(search_bak_files_payload)
+        search_bak_files_output = connection.execute(search_bak_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_bak_files_output:
+            if '.bak' in file:
+                found = True
+                context.log.highlight('Found .bak file: {}'.format(file))
+
+        # search for .tar files
+        search_tar_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.tar -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_tar_files_cmd = 'powershell.exe "{}"'.format(search_tar_files_payload)
+        search_tar_files_output = connection.execute(search_tar_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_tar_files_output:
+            if '.tar' in file:
+                found = True
+                context.log.highlight('Found .tar file: {}'.format(file))
+
+        # search for .zip files
+        search_zip_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.zip -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_zip_files_cmd = 'powershell.exe "{}"'.format(search_zip_files_payload)
+        search_zip_files_output = connection.execute(search_zip_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_zip_files_output:
+            if '.zip' in file:
+                found = True
+                context.log.highlight('Found .zip file: {}'.format(file))
+
+        # search for .rar files
+        search_rar_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.rar -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_rar_files_cmd = 'powershell.exe "{}"'.format(search_rar_files_payload)
+        search_rar_files_output = connection.execute(search_rar_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_rar_files_output:
+            if '.rar' in file:
+                found = True
+                context.log.highlight('Found .rar file: {}'.format(file))
+
+        # search for .7z files
+        search_7z_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.7z -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_7z_files_cmd = 'powershell.exe "{}"'.format(search_7z_files_payload)
+        search_7z_files_output = connection.execute(search_7z_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_7z_files_output:
+            if '.7z' in file:
+                found = True
+                context.log.highlight('Found .7z file: {}'.format(file))
