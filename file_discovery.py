@@ -8,7 +8,7 @@ class CMEModule:
     """
 
     name = 'file_discovery'
-    description = "Search for .sql files in a specified directory."
+    description = "Search for interesting files in a specified directory."
     supported_protocols = ['smb']
     opsec_safe = True   # only legitimate commands are executed on the remote host (search process and files)
     multiple_hosts = True
