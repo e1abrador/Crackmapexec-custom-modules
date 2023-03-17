@@ -38,6 +38,26 @@ class CMEModule:
                 found = True
                 context.log.highlight('Found .sql file: {}'.format(file))
 
+        # search for .msg files
+        search_msg_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.msg -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_msg_files_cmd = 'powershell.exe "{}"'.format(search_msg_files_payload)
+        search_msg_files_output = connection.execute(search_msg_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_msg_files_output:
+            if '.msg' in file:
+                found = True
+                context.log.highlight('Found .msg file: {}'.format(file))
+                               
+        # search for .cer files
+        search_cer_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.cer -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
+        search_cer_files_cmd = 'powershell.exe "{}"'.format(search_cer_files_payload)
+        search_cer_files_output = connection.execute(search_cer_files_cmd, True).split("\r\n")
+        found = False
+        for file in search_cer_files_output:
+            if '.cer' in file:
+                found = True
+                context.log.highlight('Found .cer file: {}'.format(file))
+                
         # search for .kdbx files
         search_kdbx_files_payload = "Get-ChildItem -Path {} -Recurse -Force -Include *.kdbx -ErrorAction SilentlyContinue | Select FullName -ExpandProperty FullName".format(self.search_path)
         search_kdbx_files_cmd = 'powershell.exe "{}"'.format(search_kdbx_files_payload)
